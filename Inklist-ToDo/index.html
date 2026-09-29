@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inklist — To Do</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="bg-blob blob-a" aria-hidden="true"></div>
+    <div class="bg-blob blob-b" aria-hidden="true"></div>
+
+    <section id="auth-view" class="auth-shell">
+      <div class="auth-card">
+        <aside class="auth-brand">
+          <p class="eyebrow">CIS To Do</p>
+          <h1>Inklist</h1>
+          <p class="lede">
+            Capture what matters, mark it done, and keep the rest out of the
+            way. Your tasks live on the class API — this is just a calmer place
+            to work with them.
+          </p>
+          <ul class="brand-points">
+            <li>Active and done lists</li>
+            <li>Edit without losing the thread</li>
+            <li>Sign in once, pick up later</li>
+          </ul>
+        </aside>
+
+        <div class="auth-panel">
+          <div class="auth-tabs" role="tablist">
+            <button
+              type="button"
+              class="tab-btn is-active"
+              data-tab="signin"
+              aria-selected="true"
+            >
+              Sign in
+            </button>
+            <button type="button" class="tab-btn" data-tab="signup" aria-selected="false">
+              Sign up
+            </button>
+          </div>
+
+          <form id="signin-form" class="auth-form" autocomplete="on">
+            <label>
+              Email
+              <input type="email" name="email" required placeholder="you@school.edu" />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" required minlength="6" />
+            </label>
+            <button type="submit" class="btn primary">Enter workspace</button>
+          </form>
+
+          <form id="signup-form" class="auth-form hidden" autocomplete="on">
+            <div class="row">
+              <label>
+                First name
+                <input type="text" name="first_name" required />
+              </label>
+              <label>
+                Last name
+                <input type="text" name="last_name" required />
+              </label>
+            </div>
+            <label>
+              Email
+              <input type="email" name="email" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" required minlength="6" />
+            </label>
+            <label>
+              Confirm password
+              <input type="password" name="confirm_password" required minlength="6" />
+            </label>
+            <button type="submit" class="btn primary">Create account</button>
+          </form>
+
+          <p id="auth-message" class="message" role="status"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="app-view" class="app-shell hidden">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Inklist</p>
+          <h2 id="greeting">Welcome back</h2>
+        </div>
+        <button type="button" id="signout-btn" class="btn ghost">Sign out</button>
+      </header>
+
+      <div class="app-grid">
+        <form id="add-form" class="composer card">
+          <h3>New task</h3>
+          <label>
+            Title
+            <input type="text" name="item_name" required placeholder="What needs doing?" />
+          </label>
+          <label>
+            Notes
+            <textarea
+              name="item_description"
+              rows="3"
+              placeholder="A little context helps later."
+            ></textarea>
+          </label>
+          <button type="submit" class="btn primary">Add to list</button>
+        </form>
+
+        <div class="board">
+          <div class="board-head">
+            <div class="filter-pills" role="tablist">
+              <button
+                type="button"
+                class="pill is-active"
+                data-status="active"
+                aria-selected="true"
+              >
+                Active
+              </button>
+              <button type="button" class="pill" data-status="inactive" aria-selected="false">
+                Done
+              </button>
+            </div>
+            <p id="task-count" class="count">0 tasks</p>
+          </div>
+          <div id="task-list" class="task-list" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <dialog id="edit-dialog" class="modal">
+      <form id="edit-form" method="dialog">
+        <h3>Edit task</h3>
+        <input type="hidden" name="item_id" />
+        <label>
+          Title
+          <input type="text" name="item_name" required />
+        </label>
+        <label>
+          Notes
+          <textarea name="item_description" rows="4"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button type="button" id="edit-cancel" class="btn ghost" value="cancel">
+            Cancel
+          </button>
+          <button type="submit" class="btn primary">Save changes</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast hidden" role="status"></div>
+
+    <noscript>This app requires JavaScript to connect to the To Do API.</noscript>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
